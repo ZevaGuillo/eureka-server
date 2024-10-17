@@ -1,0 +1,20 @@
+spring:
+    application:
+        name: "eurekaserver"
+    config:
+        import: "optional:configserver:http://localhost:8071/"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # Expose all Actuator endpoints over HTTP for monitoring and debugging
+  health:
+    readinessstate:
+      enabled: true  # Enable readiness state for Kubernetes and other orchestrators to check if the app is ready for traffic
+    livenessstate:
+      enabled: true   # Enable liveness state to monitor if the app needs to be restarted
+  endpoint:
+    health:
+      probes:
+        enabled: true  # Include readiness and liveness probes in the /health endpoint for comprehensive health checks
